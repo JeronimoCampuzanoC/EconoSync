@@ -1,0 +1,2 @@
+Desarrollar una app móvil que permita la reducción de las barreras de la información financiera por medio del monitoreo constante de ingresos y egresos del usuario, esto con el fin de analizar la información de manera local en el dispositivo para ayudarlo mediante estrategias y planes de ahorro o inversión(educación financiera), a realizar una gestión eficiente y consciente de sus recursos, lo que deriva en que el usuario tenga una mayor probabilidad de llegar a las metas destinadas.
+
