@@ -126,8 +126,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Introdusca un valor");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
+        jLabel3.setText("Inserte un valor");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
 
         GastoButton.setBackground(new java.awt.Color(204, 204, 0));
         GastoButton.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N

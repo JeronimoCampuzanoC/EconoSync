@@ -9,13 +9,15 @@ package econosyncapp;
  * @author jeros
  */
 public class Login extends javax.swing.JFrame {
-
+    private User us;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        us = new User(this);
+        
     }
     
 
@@ -30,8 +32,6 @@ public class Login extends javax.swing.JFrame {
 
         jCheckBox1 = new javax.swing.JCheckBox();
         jToggleButton1 = new javax.swing.JToggleButton();
-        EmailText = new javax.swing.JLabel();
-        EmailField = new javax.swing.JTextField();
         PasswordText = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         InciarButton = new javax.swing.JButton();
@@ -47,52 +47,36 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EmailText.setBackground(new java.awt.Color(255, 51, 0));
-        EmailText.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        EmailText.setForeground(new java.awt.Color(255, 255, 255));
-        EmailText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EmailText.setText("Email");
-        getContentPane().add(EmailText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 350, -1));
-
-        EmailField.setBackground(new java.awt.Color(0, 0, 45));
-        EmailField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        EmailField.setForeground(new java.awt.Color(255, 255, 255));
-        EmailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(EmailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 200, -1));
-
-        PasswordText.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PasswordText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         PasswordText.setForeground(new java.awt.Color(255, 255, 255));
         PasswordText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PasswordText.setText("PASSWORD");
-        getContentPane().add(PasswordText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 350, 20));
+        getContentPane().add(PasswordText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 350, 20));
 
-        PasswordField.setBackground(new java.awt.Color(0, 0, 61));
-        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PasswordField.setBackground(new java.awt.Color(0, 0, 29));
+        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         PasswordField.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 200, -1));
+        getContentPane().add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 200, 50));
 
         InciarButton.setBackground(new java.awt.Color(0, 0, 43));
         InciarButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         InciarButton.setForeground(new java.awt.Color(255, 255, 255));
-        InciarButton.setText("Iniciar Sesion");
+        InciarButton.setText("Log In");
         InciarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InciarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(InciarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 460, 200, -1));
+        getContentPane().add(InciarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 200, -1));
 
         UserImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/UserImg.png"))); // NOI18N
-        getContentPane().add(UserImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        getContentPane().add(UserImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 260));
 
         Aprovacion.setForeground(new java.awt.Color(255, 255, 255));
         Aprovacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,28 +91,19 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailFieldActionPerformed
-
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void InciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InciarButtonActionPerformed
-        String emailInput = EmailField.getText();
-        String passwordInput = new String(PasswordField.getPassword());
         
-        if (emailInput.equals("ricomcpato") && (passwordInput.equals("dinero123")))
+        String passwordInput = new String(PasswordField.getPassword());
+        if(!us.login(passwordInput))
         {
-            Aprovacion.setText("Exitoso");
-            MainWindow segundoFormulario = new MainWindow();
-            segundoFormulario.setVisible(true);
-            this.setVisible(false);
+            Aprovacion.setText("Contraseña Incorrecta");
+            PasswordField.setText("");
         }
-        else{
-            Aprovacion.setText("Vuelva a intentar");
-        }
+        
     }//GEN-LAST:event_InciarButtonActionPerformed
 
     /**
@@ -169,8 +144,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Aprovacion;
     private javax.swing.JLabel Bg;
-    private javax.swing.JTextField EmailField;
-    private javax.swing.JLabel EmailText;
     private javax.swing.JButton InciarButton;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordText;
