@@ -57,6 +57,7 @@ public class Login extends javax.swing.JFrame {
         PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         PasswordField.setForeground(new java.awt.Color(255, 255, 255));
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PasswordField.setBorder(new javax.swing.border.MatteBorder(null));
         PasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordFieldActionPerformed(evt);
@@ -68,19 +69,20 @@ public class Login extends javax.swing.JFrame {
         InciarButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         InciarButton.setForeground(new java.awt.Color(255, 255, 255));
         InciarButton.setText("Log In");
+        InciarButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         InciarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InciarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(InciarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 200, -1));
+        getContentPane().add(InciarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 200, 50));
 
         UserImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/UserImg.png"))); // NOI18N
         getContentPane().add(UserImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 260));
 
         Aprovacion.setForeground(new java.awt.Color(255, 255, 255));
         Aprovacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(Aprovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 110, 30));
+        getContentPane().add(Aprovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 310, 30));
 
         Bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/BgLogin.jpeg"))); // NOI18N
         Bg.setText("jLabel2");

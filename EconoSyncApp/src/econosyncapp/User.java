@@ -17,7 +17,6 @@ public class User {
     public User(Login l){
         db = new DBHelper();
         lg = l;
-        
     }
     public boolean login(String pass){
         boolean success = false;
@@ -30,5 +29,8 @@ public class User {
             
         }
         return success;
+    }
+    public boolean changePassword(){
+        return false;
     }
 }

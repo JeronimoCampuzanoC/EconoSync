@@ -18,9 +18,15 @@ public class MainWindow extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private Object[] o =  new Object[3];
     
+
+    public Account ac;
     public MainWindow() {
         initComponents();
         setLocationRelativeTo(null);
+        ac = new Account(this);
+        
+        
+        
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
         int rowCount = dtm.getRowCount();
         if (rowCount < 4) {
@@ -241,18 +247,18 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ValorFieldActionPerformed
 
     private void IngresoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoButtonActionPerformed
-        
-        String saldoActual = SaldoValue.getText();
-        int numerosaldo = Integer.parseInt(saldoActual);
         String valorIngresado = ValorField.getText();
         if (!valorIngresado.equals("")){
-            int numeroValor = Integer.parseInt(valorIngresado);
-            SaldoValue.setText(String.valueOf(numerosaldo + numeroValor));
+            
+            float numeroValor = Float.parseFloat(valorIngresado);
+            ac.addIncome(numeroValor);
             o[0] = "+";
             o[1] = IngresoType.getSelectedItem();
             o[2] = valorIngresado;
             
             dtm.addRow(o);
+            
+            
             ValorField.setText("");
             
         }
@@ -260,19 +266,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_IngresoButtonActionPerformed
 
     private void GastoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GastoButtonActionPerformed
-        String saldoActual = SaldoValue.getText();
-        int numerosaldo = Integer.parseInt(saldoActual);
         String valorIngresado = ValorField.getText();
         if (!valorIngresado.equals("")){
-            int numeroValor = Integer.parseInt(valorIngresado);
-            SaldoValue.setText(String.valueOf(numerosaldo - numeroValor));
+            
+            float numeroValor = Float.parseFloat(valorIngresado);
+            ac.addSpend(numeroValor);
             o[0] = "-";
-            o[1] = GastoType.getSelectedItem();
+            o[1] = IngresoType.getSelectedItem();
             o[2] = valorIngresado;
             
             dtm.addRow(o);
+            
+            
             ValorField.setText("");
-        }       
+            
+        }
     }//GEN-LAST:event_GastoButtonActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -317,6 +325,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void refreshBalance(float v){
+        SaldoValue.setText(String.valueOf(v));
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bg;
