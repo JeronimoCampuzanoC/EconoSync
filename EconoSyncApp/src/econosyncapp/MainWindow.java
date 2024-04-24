@@ -20,11 +20,14 @@ public class MainWindow extends javax.swing.JFrame {
     
 
     public Account ac;
+    public MovementTable mt;
     public MainWindow() {
         initComponents();
         setLocationRelativeTo(null);
-        ac = new Account(this);
         
+        
+        ac = new Account(this);
+        mt = new MovementTable(this);
         
         
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
@@ -88,7 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
         SaldoValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SaldoValue.setText("0");
         SaldoValue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(SaldoValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
+        getContentPane().add(SaldoValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 320, -1));
 
         SaldoText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         SaldoText.setForeground(new java.awt.Color(255, 255, 255));
@@ -252,12 +255,13 @@ public class MainWindow extends javax.swing.JFrame {
             
             float numeroValor = Float.parseFloat(valorIngresado);
             ac.addIncome(numeroValor);
-            o[0] = "+";
-            o[1] = IngresoType.getSelectedItem();
-            o[2] = valorIngresado;
             
-            dtm.addRow(o);
+            Movement newMove = new Movement();
+            newMove.setType("+");
+            newMove.setCategory((String)IngresoType.getSelectedItem());
+            newMove.setValue(numeroValor);
             
+            mt.addMovement(newMove);
             
             ValorField.setText("");
             
@@ -271,13 +275,13 @@ public class MainWindow extends javax.swing.JFrame {
             
             float numeroValor = Float.parseFloat(valorIngresado);
             ac.addSpend(numeroValor);
-            o[0] = "-";
-            o[1] = IngresoType.getSelectedItem();
-            o[2] = valorIngresado;
             
-            dtm.addRow(o);
+            Movement newMove = new Movement();
+            newMove.setType("-");
+            newMove.setCategory((String)GastoType.getSelectedItem());
+            newMove.setValue(numeroValor);
             
-            
+            mt.addMovement(newMove);
             ValorField.setText("");
             
         }
@@ -330,7 +334,13 @@ public class MainWindow extends javax.swing.JFrame {
         SaldoValue.setText(String.valueOf(v));
     }
     
-    
+    public void addItemMovementTable(Movement m){
+        o[0] = m.getType();
+        o[1] = m.getCategory();
+        o[2] = m.getValue();
+            
+        dtm.addRow(o);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

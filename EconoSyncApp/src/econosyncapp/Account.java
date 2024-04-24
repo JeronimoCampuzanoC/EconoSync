@@ -27,15 +27,11 @@ public class Account {
     
     public void addIncome(float in){
         this.balance += in;
-        this.refreshBalance();
+        mw.refreshBalance(this.balance);
     }
     
     public void addSpend(float sp){
         this.balance -= sp;
-        this.refreshBalance();
-    }
-    
-    public void refreshBalance(){
         mw.refreshBalance(this.balance);
     }
     

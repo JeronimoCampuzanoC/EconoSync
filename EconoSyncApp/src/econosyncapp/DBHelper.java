@@ -27,7 +27,7 @@ public class DBHelper {
             }
             catch(Exception e){
             e.printStackTrace();
-        }
+            }
         }
         return value;
     }

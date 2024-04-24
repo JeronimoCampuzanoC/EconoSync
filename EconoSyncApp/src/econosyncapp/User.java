@@ -21,12 +21,12 @@ public class User {
     public boolean login(String pass){
         boolean success = false;
         password= db.queryPassword();
+        
         if(password.equals(pass)){
             MainWindow Main = new MainWindow();
             Main.setVisible(true);
             lg.setVisible(false);
             success = true;
-            
         }
         return success;
     }
