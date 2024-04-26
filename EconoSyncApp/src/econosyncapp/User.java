@@ -25,7 +25,7 @@ public class User {
         if(password.equals(pass)){
             MainWindow Main = new MainWindow();
             Main.setVisible(true);
-            Main.setSize(360, 611);
+            Main.setSize(360, 620);
             lg.setVisible(false);
             success = true;
         }
