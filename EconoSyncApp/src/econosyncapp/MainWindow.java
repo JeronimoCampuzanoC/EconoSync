@@ -15,12 +15,11 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
-    private DefaultTableModel dtm;
-    private Object[] o =  new Object[4];
     
-
+    private DefaultTableModel dtm;
     public Account ac;
     public MovementTable mt;
+    
     public MainWindow() {
         initComponents();
         setLocationRelativeTo(null);
@@ -32,13 +31,12 @@ public class MainWindow extends javax.swing.JFrame {
         
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
         
-        //Clear Table
+        //Clear MovementTable
         int rowCount = dtm.getRowCount();
         if (rowCount < 4) {
           
         } else {
-          // Loop through the last 3 rows and remove them in reverse order
-          // This ensures row indices don't become invalid as rows are removed
+          //Erase all the columns
           for (int i = rowCount - 1; i >= rowCount - 4; i--) {
             dtm.removeRow(i);
           }
@@ -86,7 +84,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(346, 611));
-        setPreferredSize(new java.awt.Dimension(350, 610));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -176,7 +173,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 350, 10));
 
         IngresoType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sueldo", "Ganancia Ocasional", "Ingreso Pasivo", "Venta" }));
-        IngresoType.setBorder(new javax.swing.border.MatteBorder(null));
+        IngresoType.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(IngresoType, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 90, -1));
 
         GastoType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arriendo", "Comida", "Servicios", "Ropa", "Hogar", "Hobby", "Urgencia", "Deuda" }));
@@ -280,9 +277,8 @@ public class MainWindow extends javax.swing.JFrame {
             newMove.setDate(fechaActual.toString());
             
             
-            ac.addIncome(newMove.getValue());
-            
-            mt.addMovement(newMove);
+            ac.addIncome(newMove.getValue(),SaldoValue);
+            mt.addMovement(newMove,dtm);
             
             ValorField.setText("");
             
@@ -306,8 +302,8 @@ public class MainWindow extends javax.swing.JFrame {
             newMove.setDate(fechaActual.toString());
             
             
-            ac.addSpend(numeroValor);
-            mt.addMovement(newMove);
+            ac.addSpend(newMove.getValue(),SaldoValue);
+            mt.addMovement(newMove,dtm);
             
             ValorField.setText("");
             
@@ -362,18 +358,8 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
     
-    public void refreshBalance(float v){
-        SaldoValue.setText(String.valueOf(v));
-    }
     
-    public void addItemMovementTable(Movement m){
-        o[0] = m.getType();
-        o[1] = m.getCategory();
-        o[2] = m.getValue();
-        o[3] = m.getDate();
-            
-        dtm.addRow(o);
-    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
