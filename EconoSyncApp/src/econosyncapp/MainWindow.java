@@ -30,10 +30,10 @@ public class MainWindow extends javax.swing.JFrame {
         us = u;
         ac = new Account(this);
         mt = new MovementTable(this);
-        svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac);
+        
         
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
-        
+        svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
         //Clear MovementTable
         int rowCount = dtm.getRowCount();
         if (rowCount < 4) {
@@ -43,8 +43,9 @@ public class MainWindow extends javax.swing.JFrame {
           for (int i = rowCount - 1; i >= rowCount - 4; i--) {
             dtm.removeRow(i);
           }
+        
         }
-    }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.

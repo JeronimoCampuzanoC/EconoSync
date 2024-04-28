@@ -5,6 +5,7 @@
 package econosyncapp;
 
 import java.time.LocalDate;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +17,20 @@ public class SaveAccount {
     private javax.swing.JLabel acumTxt;
     private MainWindow mw;
     private Account ac; 
+    private MovementTable mt;
     private javax.swing.JProgressBar prbar;
-    public SaveAccount(MainWindow m,javax.swing.JProgressBar ahorroProgress,javax.swing.JLabel acumText, Account a){
+    
+    private DefaultTableModel dtm;
+    
+    
+    public SaveAccount(MainWindow m,javax.swing.JProgressBar ahorroProgress,javax.swing.JLabel acumText, Account a,DefaultTableModel dt, MovementTable mta){
         mw = m;
         ac = a;
         prbar = ahorroProgress;
         acumTxt= acumText;
+        dtm = dt;
+        mt= mta;
+        
     }
     
     public void addSaving(float v){
@@ -39,6 +48,7 @@ public class SaveAccount {
 
 
         ac.addSpend(newMove.getValue(),mw.getSaldoObj());
+        mt.addMovement(newMove, dtm);
     }
     
     public void substractSavig(float v){
