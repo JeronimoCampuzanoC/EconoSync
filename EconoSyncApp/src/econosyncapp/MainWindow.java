@@ -17,17 +17,20 @@ public class MainWindow extends javax.swing.JFrame {
      */
     
     private DefaultTableModel dtm;
-    public Account ac;
-    public MovementTable mt;
+    private Account ac;
+    private MovementTable mt;
+    private SaveAccount svac; 
     
-    public MainWindow() {
+    
+    private User us;
+    public MainWindow(User u) {
         initComponents();
         setLocationRelativeTo(null);
         
-        
+        us = u;
         ac = new Account(this);
         mt = new MovementTable(this);
-        
+        svac = new SaveAccount(this, ahorroProgress, ahorroValue);
         
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
         
@@ -52,6 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Settings = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         SaldoValue = new javax.swing.JLabel();
@@ -75,6 +79,19 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         Bg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        notaTitle = new javax.swing.JLabel();
+        metasTitle = new javax.swing.JLabel();
+        metasField = new javax.swing.JTextField();
+        ahorroTitle = new javax.swing.JLabel();
+        ahorroValue = new javax.swing.JLabel();
+        ahorroProgress = new javax.swing.JProgressBar();
+        ahorroField = new javax.swing.JTextField();
+        añadirAhorroTitle = new javax.swing.JLabel();
+        añadirAhorroButton = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        notasField = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        Bg1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         ahorroSectionButton = new javax.swing.JButton();
         homeSectionButton = new javax.swing.JButton();
@@ -85,6 +102,17 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(346, 611));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Settings.setBackground(java.awt.SystemColor.control);
+        Settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/settingsIcon.png"))); // NOI18N
+        Settings.setText("jButton1");
+        Settings.setBorder(new javax.swing.border.MatteBorder(null));
+        Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 80, -1));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -208,6 +236,78 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab1", jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        notaTitle.setBackground(new java.awt.Color(255, 255, 255));
+        notaTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        notaTitle.setForeground(new java.awt.Color(255, 255, 255));
+        notaTitle.setText("Notas");
+        jPanel2.add(notaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+
+        metasTitle.setBackground(new java.awt.Color(255, 255, 255));
+        metasTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        metasTitle.setForeground(new java.awt.Color(255, 255, 255));
+        metasTitle.setText("Objetivo");
+        jPanel2.add(metasTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+
+        metasField.setText("0");
+        metasField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                metasFieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(metasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 90, -1));
+
+        ahorroTitle.setBackground(new java.awt.Color(255, 255, 255));
+        ahorroTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ahorroTitle.setForeground(new java.awt.Color(255, 255, 255));
+        ahorroTitle.setText("Ahorrado");
+        jPanel2.add(ahorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 20));
+
+        ahorroValue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ahorroValue.setForeground(new java.awt.Color(255, 255, 255));
+        ahorroValue.setText("0");
+        jPanel2.add(ahorroValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 60, -1));
+
+        ahorroProgress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ahorroProgress.setForeground(new java.awt.Color(0, 255, 0));
+        ahorroProgress.setValue(50);
+        ahorroProgress.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(ahorroProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 160, 20));
+
+        ahorroField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ahorroField.setText("0");
+        ahorroField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ahorroFieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ahorroField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 90, 40));
+
+        añadirAhorroTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        añadirAhorroTitle.setForeground(new java.awt.Color(255, 255, 255));
+        añadirAhorroTitle.setText("Añadir Ahorro");
+        jPanel2.add(añadirAhorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        añadirAhorroButton.setBackground(new java.awt.Color(0, 255, 0));
+        añadirAhorroButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        añadirAhorroButton.setText("+");
+        añadirAhorroButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirAhorroButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(añadirAhorroButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 60, 40));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 350, 10));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        notasField.setViewportView(jTextArea1);
+
+        jPanel2.add(notasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 150, 140));
+
+        Bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/BgMainWindow.jpeg"))); // NOI18N
+        jPanel2.add(Bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 346, 611));
+
         jTabbedPane1.addTab("tab2", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -322,41 +422,31 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(0);        // TODO add your handling code here:
     }//GEN-LAST:event_homeSectionButtonActionPerformed
 
+    private void metasFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_metasFieldActionPerformed
+        svac.createObjective(Float.parseFloat(metasField.getText()));
+    }//GEN-LAST:event_metasFieldActionPerformed
+
+    private void ahorroFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ahorroFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ahorroFieldActionPerformed
+
+    private void añadirAhorroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirAhorroButtonActionPerformed
+        // TODO add your handling code here:
+        svac.addSaving(Float.parseFloat(ahorroField.getText()));
+        
+    }//GEN-LAST:event_añadirAhorroButtonActionPerformed
+
+    private void SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsActionPerformed
+        SettingsPopUp stpup = new SettingsPopUp(us);
+        stpup.setVisible(true);
+        stpup.setLocationRelativeTo(this);
+               // TODO add your handling code here:
+    }//GEN-LAST:event_SettingsActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-                
-            }
-        });
-    }
+    
     
     
     
@@ -364,6 +454,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bg;
+    private javax.swing.JLabel Bg1;
     private javax.swing.JButton GastoButton;
     private javax.swing.JComboBox<String> GastoType;
     private javax.swing.JLabel HomeIcon;
@@ -375,9 +466,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel SaldoText;
     private javax.swing.JLabel SaldoValue;
     private javax.swing.JLabel Section;
+    private javax.swing.JButton Settings;
     private javax.swing.JTable Tabla1Movimientos;
     private javax.swing.JTextField ValorField;
+    private javax.swing.JTextField ahorroField;
+    private javax.swing.JProgressBar ahorroProgress;
     private javax.swing.JButton ahorroSectionButton;
+    private javax.swing.JLabel ahorroTitle;
+    private javax.swing.JLabel ahorroValue;
+    private javax.swing.JButton añadirAhorroButton;
+    private javax.swing.JLabel añadirAhorroTitle;
     private javax.swing.JButton estadisticasSectionButton;
     private javax.swing.JButton homeSectionButton;
     private javax.swing.JLabel jLabel1;
@@ -391,6 +489,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField metasField;
+    private javax.swing.JLabel metasTitle;
+    private javax.swing.JLabel notaTitle;
+    private javax.swing.JScrollPane notasField;
     // End of variables declaration//GEN-END:variables
 }

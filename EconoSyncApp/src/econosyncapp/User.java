@@ -4,6 +4,8 @@
  */
 package econosyncapp;
 
+import java.io.IOException;
+
 /**
  *
  * @author jeros
@@ -23,7 +25,7 @@ public class User {
         password= db.queryPassword();
         
         if(password.equals(pass)){
-            MainWindow Main = new MainWindow();
+            MainWindow Main = new MainWindow(this);
             Main.setVisible(true);
             Main.setSize(360, 620);
             lg.setVisible(false);
@@ -31,7 +33,12 @@ public class User {
         }
         return success;
     }
-    public boolean changePassword(){
-        return false;
+    public boolean changePassword(String pass) throws IOException{
+        boolean success = false;
+        
+        db.writePassword(pass);
+        success = true;
+        
+        return success;
     }
 }

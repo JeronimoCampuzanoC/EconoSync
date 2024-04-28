@@ -25,14 +25,16 @@ public class Account {
     }
     
     
-    public void addIncome(float in, javax.swing.JLabel saldoValue){
+    public void addIncome(float in, javax.swing.JLabel SaldoValue){
         this.balance += in;
-        saldoValue.setText(String.valueOf(balance));
+        SaldoValue.setText(String.valueOf(balance));
     }
     
-    public void addSpend(float sp,javax.swing.JLabel saldoValue){
+    public void addSpend(float sp,javax.swing.JLabel SaldoValue){
         this.balance -= sp;
-        saldoValue.setText(String.valueOf(balance));
+        SaldoValue.setText(String.valueOf(balance));
     }
+    
+    
     
 }

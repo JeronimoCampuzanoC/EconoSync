@@ -9,8 +9,16 @@ import java.io.*;
  * @author jeros
  */
 public class DBHelper {
+    public void writePassword(String newP) throws IOException{
+        String csvFileName = "src/data/password.csv";
+        FileWriter writer = new FileWriter(csvFileName, false);
+        writer.write(newP);
+        writer.close();
+        
+    }
+    
     public String queryPassword(){
-        String file = "src/econosyncapp/password.csv";
+        String file = "src/data/password.csv";
         BufferedReader reader = null;
         String value = "";
         
