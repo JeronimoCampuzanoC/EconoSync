@@ -45,6 +45,7 @@ public class MainWindow extends javax.swing.JFrame {
           }
         
         }
+        Tips.showTips();
     }   
 
     /**
@@ -95,6 +96,7 @@ public class MainWindow extends javax.swing.JFrame {
         Section2 = new javax.swing.JLabel();
         Bg1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         ahorroSectionButton = new javax.swing.JButton();
         homeSectionButton = new javax.swing.JButton();
         estadisticasSectionButton = new javax.swing.JButton();
@@ -316,6 +318,8 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab2", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 350, 140));
+
         jTabbedPane1.addTab("tab3", jPanel3);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 350, 540));
@@ -495,6 +499,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
