@@ -30,7 +30,7 @@ public class MainWindow extends javax.swing.JFrame {
         us = u;
         ac = new Account(this);
         mt = new MovementTable(this);
-        svac = new SaveAccount(this, ahorroProgress, ahorroValue);
+        svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac);
         
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
         
@@ -55,12 +55,12 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SaldoText = new javax.swing.JLabel();
+        SaldoValue = new javax.swing.JLabel();
+        SaldoImg = new javax.swing.JLabel();
         Settings = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        SaldoValue = new javax.swing.JLabel();
-        SaldoText = new javax.swing.JLabel();
-        SaldoImg = new javax.swing.JLabel();
         HomeIcon = new javax.swing.JLabel();
         IngresoText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -91,6 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         notasField = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        Section2 = new javax.swing.JLabel();
         Bg1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         ahorroSectionButton = new javax.swing.JButton();
@@ -102,6 +103,26 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(346, 611));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SaldoText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        SaldoText.setForeground(new java.awt.Color(255, 255, 255));
+        SaldoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SaldoText.setText("Saldo");
+        getContentPane().add(SaldoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 350, -1));
+
+        SaldoValue.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        SaldoValue.setForeground(new java.awt.Color(255, 255, 255));
+        SaldoValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SaldoValue.setText("0");
+        SaldoValue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(SaldoValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 320, -1));
+
+        SaldoImg.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        SaldoImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/Bill (1).png"))); // NOI18N
+        SaldoImg.setMaximumSize(new java.awt.Dimension(100, 100));
+        SaldoImg.setMinimumSize(new java.awt.Dimension(100, 100));
+        SaldoImg.setPreferredSize(new java.awt.Dimension(100, 100));
+        getContentPane().add(SaldoImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 240, 110));
 
         Settings.setBackground(java.awt.SystemColor.control);
         Settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/settingsIcon.png"))); // NOI18N
@@ -117,26 +138,6 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        SaldoValue.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        SaldoValue.setForeground(new java.awt.Color(255, 255, 255));
-        SaldoValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SaldoValue.setText("0");
-        SaldoValue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(SaldoValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 320, -1));
-
-        SaldoText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        SaldoText.setForeground(new java.awt.Color(255, 255, 255));
-        SaldoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SaldoText.setText("Saldo");
-        jPanel1.add(SaldoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 350, -1));
-
-        SaldoImg.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        SaldoImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/Bill (1).png"))); // NOI18N
-        SaldoImg.setMaximumSize(new java.awt.Dimension(100, 100));
-        SaldoImg.setMinimumSize(new java.awt.Dimension(100, 100));
-        SaldoImg.setPreferredSize(new java.awt.Dimension(100, 100));
-        jPanel1.add(SaldoImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 240, 110));
 
         HomeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/Home (1).png"))); // NOI18N
         jPanel1.add(HomeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, -1));
@@ -305,6 +306,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel2.add(notasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 150, 140));
 
+        Section2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/PestañaSuperior_1.png"))); // NOI18N
+        jPanel2.add(Section2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -30, 210, 80));
+
         Bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/BgMainWindow.jpeg"))); // NOI18N
         jPanel2.add(Bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 346, 611));
 
@@ -358,7 +362,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void ValorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValorFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ValorFieldActionPerformed
-
+    
+    public javax.swing.JLabel getSaldoObj(){
+        return SaldoValue;
+    }
+    
     private void IngresoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoButtonActionPerformed
         String valorIngresado = ValorField.getText();
         if (!valorIngresado.equals("")){
@@ -466,6 +474,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel SaldoText;
     private javax.swing.JLabel SaldoValue;
     private javax.swing.JLabel Section;
+    private javax.swing.JLabel Section2;
     private javax.swing.JButton Settings;
     private javax.swing.JTable Tabla1Movimientos;
     private javax.swing.JTextField ValorField;
