@@ -15,8 +15,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);
-        us = new User(this);
+        setLocationRelativeTo(null);//Hace que la ventana aparesca en el centro
+        us = new User(this);//Creando un objeto de la clase user
         
     }
     
@@ -94,7 +94,12 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
-        // TODO add your handling code here:
+        String passwordInput = new String(PasswordField.getPassword());
+        if(!us.login(passwordInput))
+        {
+            Aprovacion.setText("Contraseña Incorrecta");
+            PasswordField.setText("");
+        }
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void InciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InciarButtonActionPerformed

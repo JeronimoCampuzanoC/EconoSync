@@ -22,9 +22,9 @@ public class User {
     }
     public boolean login(String pass){
         boolean success = false;
-        password= db.queryPassword();
+        this.password= db.queryPassword();
         
-        if(password.equals(pass)){
+        if(password.equals(pass)){//Si esto se cumple, inicio de sesion
             MainWindow Main = new MainWindow(this);
             Main.setVisible(true);
             Main.setSize(360, 620);

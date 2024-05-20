@@ -64,7 +64,6 @@ public class SaveAccount {
     
     public void refreshProgressBar(){
         float calc = (100*accumulated)/objective;
-        System.out.println(calc);
         if (calc>100){
             prbar.setValue(100);
         }

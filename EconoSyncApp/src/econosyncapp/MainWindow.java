@@ -32,7 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
         mt = new MovementTable(this);
         
         
-        dtm = (DefaultTableModel)Tabla1Movimientos.getModel();
+        dtm = (DefaultTableModel)Tabla1Movimientos.getModel();//Convertir clases con conversion explicita
         svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
         //Clear MovementTable
         int rowCount = dtm.getRowCount();
@@ -45,6 +45,7 @@ public class MainWindow extends javax.swing.JFrame {
           }
         
         }
+        
         Tips.showTips();
     }   
 
