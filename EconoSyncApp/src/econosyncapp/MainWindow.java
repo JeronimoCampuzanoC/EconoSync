@@ -82,7 +82,9 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         Bg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        investIcon1 = new javax.swing.JLabel();
         notaTitle = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         metasTitle = new javax.swing.JLabel();
         metasField = new javax.swing.JTextField();
         ahorroTitle = new javax.swing.JLabel();
@@ -242,11 +244,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        investIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
+        jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 40));
+
         notaTitle.setBackground(new java.awt.Color(255, 255, 255));
         notaTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         notaTitle.setForeground(new java.awt.Color(255, 255, 255));
         notaTitle.setText("Notas");
         jPanel2.add(notaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 160, 150));
 
         metasTitle.setBackground(new java.awt.Color(255, 255, 255));
         metasTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -493,6 +499,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel añadirAhorroTitle;
     private javax.swing.JButton estadisticasSectionButton;
     private javax.swing.JButton homeSectionButton;
+    private javax.swing.JLabel investIcon1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -501,6 +508,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
