@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package econosyncapp;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +33,7 @@ public class MainWindow extends javax.swing.JFrame {
         ac = new Account(this);
         mt = new MovementTable(this);
         
-        
+        //Tabla de movimientos
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();//Convertir clases con conversion explicita
         svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
         //Clear MovementTable
@@ -46,8 +48,18 @@ public class MainWindow extends javax.swing.JFrame {
         
         }
         
+        //Tips
         Tips.showTips();
+        
+        
+        //Grafica circular
+        
+        
+        
+        
     }   
+    //Grafica Circular 
+    boolean bandera = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +96,9 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         investIcon1 = new javax.swing.JLabel();
         notaTitle = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        graficar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         metasTitle = new javax.swing.JLabel();
         metasField = new javax.swing.JTextField();
         ahorroTitle = new javax.swing.JLabel();
@@ -245,14 +259,42 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         investIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
-        jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 40));
+        jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 50));
 
         notaTitle.setBackground(new java.awt.Color(255, 255, 255));
         notaTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         notaTitle.setForeground(new java.awt.Color(255, 255, 255));
         notaTitle.setText("Notas");
         jPanel2.add(notaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 160, 150));
+
+        graficar.setBackground(new java.awt.Color(0, 102, 255));
+        graficar.setText("Graficar");
+        graficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(graficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Arriendo", "0", "0"},
+                {"Comida", "0", "0"},
+                {"Servicios", "0", "0"},
+                {"Ropa", "0", "0"},
+                {"Hogar", "0", "0"},
+                {"Hobby", "0", "0"},
+                {"Urgencia", "0", "0"},
+                {"Deuda", "0", "0"},
+                {"Ahorro", "0", null}
+            },
+            new String [] {
+                "Tipo", "=", "%"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 170, 150));
 
         metasTitle.setBackground(new java.awt.Color(255, 255, 255));
         metasTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -463,6 +505,64 @@ public class MainWindow extends javax.swing.JFrame {
                // TODO add your handling code here:
     }//GEN-LAST:event_SettingsActionPerformed
 
+    private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        bandera = true;
+        repaint();
+    }//GEN-LAST:event_graficarActionPerformed
+    
+    
+    
+    public void paint(Graphics g){
+        super.paint(g);
+        if (bandera){
+            Float[] values = mt.calculateStadistics();
+            float total=0;
+            for (Float b1 : values) {
+                total+=b1;
+            }
+            float[] degrees= new float[9];
+            
+            for (int i = 0;i<degrees.length;i++) {
+                degrees[i]=values[i]*360/total;
+            }
+            //Arriendo rojo
+            g.setColor(new Color(255,0,0));
+            g.fillArc(20, 190, 150, 150, 0, Math.round(degrees[0]));
+            
+            //Comida  azul
+            g.setColor(new Color(66,135,245));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]), Math.round(degrees[1]));
+            
+            //Servicios   verde
+            g.setColor(new Color(66,209,54));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]), Math.round(degrees[2]));
+            
+            //Ropa  morado
+            g.setColor(new Color(106,44,171));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]), Math.round(degrees[3]));
+            
+            //Hogar  rosado
+            g.setColor(new Color(204,29,105));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]), Math.round(degrees[4]));
+            
+            //Hobby amarillo
+            g.setColor(new Color(255,255,0));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]+degrees[4]), Math.round(degrees[5]));
+            
+            //Urgencia  gris
+            g.setColor(new Color(82,79,80));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]+degrees[4]+degrees[5]), Math.round(degrees[6]));
+            
+            //Deuda negro
+            g.setColor(new Color(0,0,0));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]+degrees[4]+degrees[5]+degrees[6]), Math.round(degrees[7]));
+            
+            //Ahorro  blanco
+            g.setColor(new Color(255,255,255));
+            g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]+degrees[4]+degrees[5]+degrees[6]+degrees[7]), Math.round(degrees[8]));
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -498,6 +598,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton añadirAhorroButton;
     private javax.swing.JLabel añadirAhorroTitle;
     private javax.swing.JButton estadisticasSectionButton;
+    private javax.swing.JButton graficar;
     private javax.swing.JButton homeSectionButton;
     private javax.swing.JLabel investIcon1;
     private javax.swing.JLabel jLabel1;
@@ -508,13 +609,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField metasField;
     private javax.swing.JLabel metasTitle;
