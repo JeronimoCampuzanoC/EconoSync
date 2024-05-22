@@ -15,7 +15,7 @@ public class MovementTable {
     
     private MainWindow mw;
     private Object[] o =  new Object[4];
-    public MovementTable(MainWindow m){
+    public MovementTable(MainWindow m) throws IOException{
         mw = m;
     }
     public void addMovement(Movement m,DefaultTableModel dtm) throws IOException{

@@ -23,7 +23,7 @@ public class User {
         db = new DBHelper();
         lg = l;
     }
-    public boolean login(String pass){
+    public boolean login(String pass) throws IOException{
         boolean success = false;
         this.password= db.queryPassword();
         

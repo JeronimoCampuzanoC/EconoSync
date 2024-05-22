@@ -36,7 +36,7 @@ public class SaveAccount {
         
     }
     
-    public void addSaving(float v){
+    public void addSaving(float v) throws IOException{
         this.accumulated += v;
         acumTxt.setText(String.valueOf(accumulated));
         refreshProgressBar();

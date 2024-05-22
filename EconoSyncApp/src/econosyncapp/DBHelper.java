@@ -87,5 +87,36 @@ public class DBHelper {
         }
         return registry;
     }
+    public void writeBalance(String newP) throws IOException{
+        String csvFileName = "src/data/balance.csv";
+        FileWriter writer = new FileWriter(csvFileName, false);
+        writer.write(newP);
+        writer.close();
+        
+    }
+    
+    public String queryBalance(){
+        String file = "src/data/balance.csv";
+        BufferedReader reader = null;
+        String value = "";
+        
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            value = reader.readLine();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            try{
+                reader.close();
+            }
+            catch(Exception e){
+            e.printStackTrace();
+            }
+        }
+        return value;
+    }
+    
     
 }

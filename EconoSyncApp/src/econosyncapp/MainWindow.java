@@ -62,6 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
         Tips.showTips();
         mt.recoverMovements();
         
+        SaldoValue.setText(Float.toString(ac.getBalance()));
         
     }   
     //Grafica Circular 
@@ -478,7 +479,11 @@ public class MainWindow extends javax.swing.JFrame {
             newMove.setDate(fechaActual.toString());
             
             
-            ac.addIncome(newMove.getValue(),SaldoValue);
+            try {
+                ac.addIncome(newMove.getValue(),SaldoValue);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             try {
                 mt.addMovement(newMove,dtm);
@@ -508,7 +513,11 @@ public class MainWindow extends javax.swing.JFrame {
             newMove.setDate(fechaActual.toString());
             
             
-            ac.addSpend(newMove.getValue(),SaldoValue);
+            try {
+                ac.addSpend(newMove.getValue(),SaldoValue);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 mt.addMovement(newMove,dtm);
             } catch (IOException ex) {

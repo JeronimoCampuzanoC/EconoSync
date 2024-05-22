@@ -4,6 +4,10 @@
  */
 package econosyncapp;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jeros
@@ -95,20 +99,28 @@ public class Login extends javax.swing.JFrame {
 
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         String passwordInput = new String(PasswordField.getPassword());
-        if(!us.login(passwordInput))
-        {
-            Aprovacion.setText("Contraseña Incorrecta");
-            PasswordField.setText("");
+        try {
+            if(!us.login(passwordInput))
+            {
+                Aprovacion.setText("Contraseña Incorrecta");
+                PasswordField.setText("");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void InciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InciarButtonActionPerformed
         
         String passwordInput = new String(PasswordField.getPassword());
-        if(!us.login(passwordInput))
-        {
-            Aprovacion.setText("Contraseña Incorrecta");
-            PasswordField.setText("");
+        try {
+            if(!us.login(passwordInput))
+            {
+                Aprovacion.setText("Contraseña Incorrecta");
+                PasswordField.setText("");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_InciarButtonActionPerformed
