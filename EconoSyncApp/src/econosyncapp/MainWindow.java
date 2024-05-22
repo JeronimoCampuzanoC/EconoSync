@@ -22,7 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Account ac;
     private MovementTable mt;
     private SaveAccount svac; 
-    
+    private DefaultTableModel spdtm;
     
     private User us;
     public MainWindow(User u) {
@@ -35,25 +35,16 @@ public class MainWindow extends javax.swing.JFrame {
         
         //Tabla de movimientos
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();//Convertir clases con conversion explicita
-        svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
-        //Clear MovementTable
-        int rowCount = dtm.getRowCount();
-        if (rowCount < 4) {
-          
-        } else {
-          //Erase all the columns
-          for (int i = rowCount - 1; i >= rowCount - 4; i--) {
-            dtm.removeRow(i);
-          }
+        TablaGastos.setDefaultRenderer(TablaGastos.getColumnClass(0), new CustomTableCellRenderer());
+        //Tabla Gastos
+        spdtm = (DefaultTableModel)TablaGastos.getModel();
         
-        }
+        
+        svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
+        
         
         //Tips
         Tips.showTips();
-        
-        
-        //Grafica circular
-        
         
         
         
@@ -94,26 +85,28 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         Bg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        investIcon1 = new javax.swing.JLabel();
-        notaTitle = new javax.swing.JLabel();
         graficar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaGastos = new javax.swing.JTable();
+        jSeparator4 = new javax.swing.JSeparator();
+        investIcon1 = new javax.swing.JLabel();
+        Section2 = new javax.swing.JLabel();
+        Bg1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        investIcon2 = new javax.swing.JLabel();
+        Section3 = new javax.swing.JLabel();
         metasTitle = new javax.swing.JLabel();
         metasField = new javax.swing.JTextField();
         ahorroTitle = new javax.swing.JLabel();
         ahorroValue = new javax.swing.JLabel();
         ahorroProgress = new javax.swing.JProgressBar();
-        ahorroField = new javax.swing.JTextField();
         añadirAhorroTitle = new javax.swing.JLabel();
+        ahorroField = new javax.swing.JTextField();
         añadirAhorroButton = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JSeparator();
         notasField = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        Section2 = new javax.swing.JLabel();
-        Bg1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        notaTitle = new javax.swing.JLabel();
+        Bg2 = new javax.swing.JLabel();
         ahorroSectionButton = new javax.swing.JButton();
         homeSectionButton = new javax.swing.JButton();
         estadisticasSectionButton = new javax.swing.JButton();
@@ -146,14 +139,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         Settings.setBackground(java.awt.SystemColor.control);
         Settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/settingsIcon.png"))); // NOI18N
-        Settings.setText("jButton1");
         Settings.setBorder(new javax.swing.border.MatteBorder(null));
         Settings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SettingsActionPerformed(evt);
             }
         });
-        getContentPane().add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 80, -1));
+        getContentPane().add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 70, -1));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -234,10 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
         Tabla1Movimientos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Tabla1Movimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tipo", "Categoria", "Valor", "Fecha"
@@ -258,15 +247,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        investIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
-        jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 50));
-
-        notaTitle.setBackground(new java.awt.Color(255, 255, 255));
-        notaTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        notaTitle.setForeground(new java.awt.Color(255, 255, 255));
-        notaTitle.setText("Notas");
-        jPanel2.add(notaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
-
         graficar.setBackground(new java.awt.Color(0, 102, 255));
         graficar.setText("Graficar");
         graficar.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +256,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jPanel2.add(graficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaGastos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Arriendo", "0", "0"},
                 {"Comida", "0", "0"},
@@ -286,77 +266,25 @@ public class MainWindow extends javax.swing.JFrame {
                 {"Hobby", "0", "0"},
                 {"Urgencia", "0", "0"},
                 {"Deuda", "0", "0"},
-                {"Ahorro", "0", null}
+                {"Ahorro", "0", "0"}
             },
             new String [] {
                 "Tipo", "=", "%"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(TablaGastos);
+        if (TablaGastos.getColumnModel().getColumnCount() > 0) {
+            TablaGastos.getColumnModel().getColumn(1).setPreferredWidth(85);
+            TablaGastos.getColumnModel().getColumn(2).setPreferredWidth(45);
+        }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 170, 150));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 180));
 
-        metasTitle.setBackground(new java.awt.Color(255, 255, 255));
-        metasTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        metasTitle.setForeground(new java.awt.Color(255, 255, 255));
-        metasTitle.setText("Objetivo");
-        jPanel2.add(metasTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 10, 340));
 
-        metasField.setText("0");
-        metasField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                metasFieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(metasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 90, -1));
-
-        ahorroTitle.setBackground(new java.awt.Color(255, 255, 255));
-        ahorroTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        ahorroTitle.setForeground(new java.awt.Color(255, 255, 255));
-        ahorroTitle.setText("Ahorrado");
-        jPanel2.add(ahorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 20));
-
-        ahorroValue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        ahorroValue.setForeground(new java.awt.Color(255, 255, 255));
-        ahorroValue.setText("0");
-        jPanel2.add(ahorroValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 60, -1));
-
-        ahorroProgress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        ahorroProgress.setForeground(new java.awt.Color(0, 255, 0));
-        ahorroProgress.setValue(50);
-        ahorroProgress.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.add(ahorroProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 160, 20));
-
-        ahorroField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ahorroField.setText("0");
-        ahorroField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ahorroFieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(ahorroField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 90, 40));
-
-        añadirAhorroTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        añadirAhorroTitle.setForeground(new java.awt.Color(255, 255, 255));
-        añadirAhorroTitle.setText("Añadir Ahorro");
-        jPanel2.add(añadirAhorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
-
-        añadirAhorroButton.setBackground(new java.awt.Color(0, 255, 0));
-        añadirAhorroButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        añadirAhorroButton.setText("+");
-        añadirAhorroButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                añadirAhorroButtonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(añadirAhorroButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 60, 40));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 350, 10));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        notasField.setViewportView(jTextArea1);
-
-        jPanel2.add(notasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 150, 140));
+        investIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
+        jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 50));
 
         Section2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/PestañaSuperior_1.png"))); // NOI18N
         jPanel2.add(Section2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -30, 210, 80));
@@ -367,7 +295,82 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab2", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 350, 140));
+
+        investIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
+        jPanel3.add(investIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 50));
+
+        Section3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/PestañaSuperior_1.png"))); // NOI18N
+        jPanel3.add(Section3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -30, 210, 80));
+
+        metasTitle.setBackground(new java.awt.Color(255, 255, 255));
+        metasTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        metasTitle.setForeground(new java.awt.Color(255, 255, 255));
+        metasTitle.setText("Objetivo");
+        jPanel3.add(metasTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+
+        metasField.setText("0");
+        metasField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                metasFieldActionPerformed(evt);
+            }
+        });
+        jPanel3.add(metasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 90, -1));
+
+        ahorroTitle.setBackground(new java.awt.Color(255, 255, 255));
+        ahorroTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ahorroTitle.setForeground(new java.awt.Color(255, 255, 255));
+        ahorroTitle.setText("Ahorrado");
+        jPanel3.add(ahorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 20));
+
+        ahorroValue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ahorroValue.setForeground(new java.awt.Color(255, 255, 255));
+        ahorroValue.setText("0");
+        jPanel3.add(ahorroValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 60, -1));
+
+        ahorroProgress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ahorroProgress.setForeground(new java.awt.Color(0, 255, 0));
+        ahorroProgress.setValue(50);
+        ahorroProgress.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.add(ahorroProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 160, 20));
+
+        añadirAhorroTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        añadirAhorroTitle.setForeground(new java.awt.Color(255, 255, 255));
+        añadirAhorroTitle.setText("Añadir Ahorro");
+        jPanel3.add(añadirAhorroTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        ahorroField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ahorroField.setText("0");
+        ahorroField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ahorroFieldActionPerformed(evt);
+            }
+        });
+        jPanel3.add(ahorroField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 90, 40));
+
+        añadirAhorroButton.setBackground(new java.awt.Color(0, 255, 0));
+        añadirAhorroButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        añadirAhorroButton.setText("+");
+        añadirAhorroButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirAhorroButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(añadirAhorroButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 60, 40));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        notasField.setViewportView(jTextArea1);
+
+        jPanel3.add(notasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 150, 140));
+
+        notaTitle.setBackground(new java.awt.Color(255, 255, 255));
+        notaTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        notaTitle.setForeground(new java.awt.Color(255, 255, 255));
+        notaTitle.setText("Notas");
+        jPanel3.add(notaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+
+        Bg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/BgMainWindow.jpeg"))); // NOI18N
+        jPanel3.add(Bg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 346, 611));
 
         jTabbedPane1.addTab("tab3", jPanel3);
 
@@ -473,11 +476,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_GastoButtonActionPerformed
 
     private void ahorroSectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ahorroSectionButtonActionPerformed
-        jTabbedPane1.setSelectedIndex(1); 
+        jTabbedPane1.setSelectedIndex(2); 
     }//GEN-LAST:event_ahorroSectionButtonActionPerformed
 
     private void estadisticasSectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasSectionButtonActionPerformed
-        jTabbedPane1.setSelectedIndex(2); 
+        jTabbedPane1.setSelectedIndex(1); 
     }//GEN-LAST:event_estadisticasSectionButtonActionPerformed
 
     private void homeSectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeSectionButtonActionPerformed
@@ -508,6 +511,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
         bandera = true;
         repaint();
+        
     }//GEN-LAST:event_graficarActionPerformed
     
     
@@ -520,11 +524,20 @@ public class MainWindow extends javax.swing.JFrame {
             for (Float b1 : values) {
                 total+=b1;
             }
+            for (int i=0;i<values.length;i++){
+                spdtm.setValueAt(values[i], i, 1);
+            }            
+            
+            
             float[] degrees= new float[9];
             
             for (int i = 0;i<degrees.length;i++) {
                 degrees[i]=values[i]*360/total;
             }
+            
+            for (int i=0;i<values.length;i++){
+                spdtm.setValueAt(Math.round((degrees[i]*100)/360), i, 2);
+            }            
             //Arriendo rojo
             g.setColor(new Color(255,0,0));
             g.fillArc(20, 190, 150, 150, 0, Math.round(degrees[0]));
@@ -561,6 +574,10 @@ public class MainWindow extends javax.swing.JFrame {
             g.setColor(new Color(255,255,255));
             g.fillArc(20, 190, 150, 150, Math.round(degrees[0]+degrees[1]+degrees[2]+degrees[3]+degrees[4]+degrees[5]+degrees[6]+degrees[7]), Math.round(degrees[8]));
             
+            
+            
+            
+            bandera=false;
         }
     }
     /**
@@ -575,6 +592,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bg;
     private javax.swing.JLabel Bg1;
+    private javax.swing.JLabel Bg2;
     private javax.swing.JButton GastoButton;
     private javax.swing.JComboBox<String> GastoType;
     private javax.swing.JLabel HomeIcon;
@@ -587,8 +605,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel SaldoValue;
     private javax.swing.JLabel Section;
     private javax.swing.JLabel Section2;
+    private javax.swing.JLabel Section3;
     private javax.swing.JButton Settings;
     private javax.swing.JTable Tabla1Movimientos;
+    private javax.swing.JTable TablaGastos;
     private javax.swing.JTextField ValorField;
     private javax.swing.JTextField ahorroField;
     private javax.swing.JProgressBar ahorroProgress;
@@ -601,6 +621,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton graficar;
     private javax.swing.JButton homeSectionButton;
     private javax.swing.JLabel investIcon1;
+    private javax.swing.JLabel investIcon2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -608,7 +629,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -616,7 +636,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField metasField;
     private javax.swing.JLabel metasTitle;

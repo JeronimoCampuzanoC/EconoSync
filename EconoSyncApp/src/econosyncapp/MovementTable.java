@@ -53,5 +53,7 @@ public class MovementTable {
         }
         return spendStadistics;
     }
+    
+
 
 }
