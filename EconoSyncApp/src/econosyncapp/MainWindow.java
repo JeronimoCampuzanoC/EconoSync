@@ -23,6 +23,7 @@ public class MainWindow extends javax.swing.JFrame {
     private MovementTable mt;
     private SaveAccount svac; 
     private DefaultTableModel spdtm;
+    private DefaultTableModel indtm;
     
     private User us;
     public MainWindow(User u) {
@@ -36,8 +37,12 @@ public class MainWindow extends javax.swing.JFrame {
         //Tabla de movimientos
         dtm = (DefaultTableModel)Tabla1Movimientos.getModel();//Convertir clases con conversion explicita
         TablaGastos.setDefaultRenderer(TablaGastos.getColumnClass(0), new CustomTableCellRenderer());
+        TablaIngresos.setDefaultRenderer(TablaIngresos.getColumnClass(0), new CustomTableCellRenderer());
         //Tabla Gastos
         spdtm = (DefaultTableModel)TablaGastos.getModel();
+        
+        //Tabla Ingresos
+        indtm = (DefaultTableModel)TablaIngresos.getModel();
         
         
         svac = new SaveAccount(this, ahorroProgress, ahorroValue,ac,dtm, mt);
@@ -88,9 +93,11 @@ public class MainWindow extends javax.swing.JFrame {
         graficar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaGastos = new javax.swing.JTable();
-        jSeparator4 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaIngresos = new javax.swing.JTable();
         investIcon1 = new javax.swing.JLabel();
         Section2 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         Bg1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         investIcon2 = new javax.swing.JLabel();
@@ -280,14 +287,33 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 180));
 
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 10, 340));
+        TablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Sueldo", "0", "0"},
+                {"Ocasional", "0", "0"},
+                {"Pasivo", "0", "0"},
+                {"Venta", "0", "0"}
+            },
+            new String [] {
+                "Tipo", "=", "%"
+            }
+        ));
+        jScrollPane3.setViewportView(TablaIngresos);
+        if (TablaIngresos.getColumnModel().getColumnCount() > 0) {
+            TablaIngresos.getColumnModel().getColumn(1).setPreferredWidth(85);
+            TablaIngresos.getColumnModel().getColumn(2).setPreferredWidth(45);
+        }
+
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 170, 180));
 
         investIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/102501 (1).png"))); // NOI18N
         jPanel2.add(investIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 50, 50));
 
         Section2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/PestañaSuperior_1.png"))); // NOI18N
         jPanel2.add(Section2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -30, 210, 80));
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 10, 160));
 
         Bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/econosyncapp/imagenes/BgMainWindow.jpeg"))); // NOI18N
         jPanel2.add(Bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 346, 611));
@@ -519,6 +545,7 @@ public class MainWindow extends javax.swing.JFrame {
     public void paint(Graphics g){
         super.paint(g);
         if (bandera){
+            //Gastos
             Float[] values = mt.calculateStadistics();
             float total=0;
             for (Float b1 : values) {
@@ -577,6 +604,44 @@ public class MainWindow extends javax.swing.JFrame {
             
             
             
+            
+            //Ingresos
+            Float[] values1 = mt.calculateStadisticsIngresos();
+            float total1=0;
+            for(Float b1 : values1) {
+                total1+=b1;
+            }
+            for (int i=0;i<values1.length;i++){
+                indtm.setValueAt(values1[i], i, 1);
+            }            
+            
+            
+            float[] degrees1= new float[4];
+            
+            for (int i = 0;i<degrees1.length;i++) {
+                degrees1[i]=values1[i]*360/total1;
+            }
+            
+            for (int i=0;i<values1.length;i++){
+                indtm.setValueAt(Math.round((degrees1[i]*100)/360), i, 2);
+            }            
+            //Arriendo rojo
+            g.setColor(new Color(255,0,0));
+            g.fillArc(200, 190, 150, 150, 0, Math.round(degrees1[0]));
+            
+            //Comida  azul
+            g.setColor(new Color(66,135,245));
+            g.fillArc(200, 190, 150, 150, Math.round(degrees1[0]), Math.round(degrees1[1]));
+            
+            //Servicios   verde
+            g.setColor(new Color(66,209,54));
+            g.fillArc(200, 190, 150, 150, Math.round(degrees1[0]+degrees1[1]), Math.round(degrees1[2]));
+            
+            //Ropa  morado
+            g.setColor(new Color(106,44,171));
+            g.fillArc(200, 190, 150, 150, Math.round(degrees1[0]+degrees1[1]+degrees1[2]), Math.round(degrees1[3]));
+            
+            
             bandera=false;
         }
     }
@@ -609,6 +674,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Settings;
     private javax.swing.JTable Tabla1Movimientos;
     private javax.swing.JTable TablaGastos;
+    private javax.swing.JTable TablaIngresos;
     private javax.swing.JTextField ValorField;
     private javax.swing.JTextField ahorroField;
     private javax.swing.JProgressBar ahorroProgress;
@@ -631,6 +697,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

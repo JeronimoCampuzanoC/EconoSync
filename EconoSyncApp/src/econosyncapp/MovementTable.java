@@ -54,6 +54,28 @@ public class MovementTable {
         return spendStadistics;
     }
     
+    public Float[] calculateStadisticsIngresos(){
+        Float[] spendStadistics= new Float[4];
+        int indexSet;
+        for (int i = 0; i < spendStadistics.length; i++) {
+            spendStadistics[i] = 0.0f;
+        }
+        for (Movement registry1 : registry) {
+            if (registry1.getType().equals("+")){
+                switch (registry1.getCategory()) {
+                    case "Sueldo" -> indexSet=0;
+                    case "Ganancia Ocasional" -> indexSet=1;
+                    case "Ingreso Pasivo" -> indexSet=2;
+                    case "Venta" -> indexSet=3;
+                    default -> indexSet=0;
+                }
+                spendStadistics[indexSet]=spendStadistics[indexSet]+registry1.getValue();
+            }
+            
+        }
+        return spendStadistics;
+    }
+    
 
 
 }
