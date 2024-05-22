@@ -5,7 +5,10 @@
 package econosyncapp;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +29,14 @@ public class MainWindow extends javax.swing.JFrame {
     private DefaultTableModel indtm;
     
     private User us;
-    public MainWindow(User u) {
+    
+    public User getus(){
+        return us;
+    }
+    public DefaultTableModel getdtm(){
+        return dtm;
+    }
+    public MainWindow(User u) throws IOException {
         initComponents();
         setLocationRelativeTo(null);
         
@@ -50,7 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         //Tips
         Tips.showTips();
-        
+        mt.recoverMovements();
         
         
     }   
@@ -469,7 +479,12 @@ public class MainWindow extends javax.swing.JFrame {
             
             
             ac.addIncome(newMove.getValue(),SaldoValue);
-            mt.addMovement(newMove,dtm);
+            
+            try {
+                mt.addMovement(newMove,dtm);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             ValorField.setText("");
             
@@ -494,7 +509,11 @@ public class MainWindow extends javax.swing.JFrame {
             
             
             ac.addSpend(newMove.getValue(),SaldoValue);
-            mt.addMovement(newMove,dtm);
+            try {
+                mt.addMovement(newMove,dtm);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             ValorField.setText("");
             

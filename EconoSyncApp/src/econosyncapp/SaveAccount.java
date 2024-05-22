@@ -4,7 +4,10 @@
  */
 package econosyncapp;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,7 +51,11 @@ public class SaveAccount {
 
 
         ac.addSpend(newMove.getValue(),mw.getSaldoObj());
-        mt.addMovement(newMove, dtm);
+        try {
+            mt.addMovement(newMove, dtm);
+        } catch (IOException ex) {
+            Logger.getLogger(SaveAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void substractSavig(float v){

@@ -16,6 +16,9 @@ public class User {
     private String password;
     private DBHelper db;
     
+    public DBHelper getdb(){
+        return db;
+    }
     public User(Login l){
         db = new DBHelper();
         lg = l;

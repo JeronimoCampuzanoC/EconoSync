@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package econosyncapp;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -17,8 +18,9 @@ public class MovementTable {
     public MovementTable(MainWindow m){
         mw = m;
     }
-    public void addMovement(Movement m,DefaultTableModel dtm){
+    public void addMovement(Movement m,DefaultTableModel dtm) throws IOException{
         registry.add(m);
+        mw.getus().getdb().writeMovement(m);
         o[0] = m.getType();
         o[1] = m.getCategory();
         o[2] = m.getValue();
@@ -75,7 +77,18 @@ public class MovementTable {
         }
         return spendStadistics;
     }
-    
+    public void recoverMovements() throws IOException{
+        registry = mw.getus().getdb().readMovements();
+        for (Movement m : registry) {
+            o[0] = m.getType();
+            o[1] = m.getCategory();
+            o[2] = m.getValue();
+            o[3] = m.getDate();
+
+            mw.getdtm().addRow(o);
+        }
+        
+    }
 
 
 }
