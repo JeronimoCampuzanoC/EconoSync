@@ -550,8 +550,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ahorroFieldActionPerformed
 
     private void añadirAhorroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirAhorroButtonActionPerformed
-        // TODO add your handling code here:
-        svac.addSaving(Float.parseFloat(ahorroField.getText()));
+        try {
+            // TODO add your handling code here:
+            svac.addSaving(Float.parseFloat(ahorroField.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_añadirAhorroButtonActionPerformed
 
